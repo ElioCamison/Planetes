@@ -3,21 +3,26 @@ package com.esliceu.models;
 import java.math.BigInteger;
 
 public class Planeta {
-    private int id;
+    private int idplaneta;
     private String nom;
     private float massa;
     private Boolean habitable;
 
     public Planeta(String nom, float massa, Boolean habitable) {
-        this.id = id;
+        this.idplaneta = idplaneta;
         this.nom = nom;
         this.massa = massa;
         this.habitable = habitable;
     }
 
-    public int getId() {
-        return id;
+    public void setIdplaneta(int idplaneta) {
+        this.idplaneta = idplaneta;
     }
+
+    public int getId() {
+        return idplaneta;
+    }
+
 
     public String getNom() {
         return nom;
@@ -45,6 +50,6 @@ public class Planeta {
 
     @Override
     public String toString() {
-        return "Planeta{" + "id=" + id + ", nom='" + nom + '\'' + ", massa=" + massa + ", habitable=" + habitable + '}';
+        return "Planeta{" + "id=" + idplaneta + ", nom='" + nom + '\'' + ", massa=" + massa + ", habitable=" + habitable + '}';
     }
 }

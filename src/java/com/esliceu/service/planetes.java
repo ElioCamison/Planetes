@@ -1,8 +1,6 @@
-package com.esliceu.serviceplanetes;
+package com.esliceu.service;
 
-import com.esliceu.dao.SatelitsDAO;
 import com.esliceu.dao.mysql.MySQLDaoManager;
-import com.esliceu.dao.mysql.MySQLSatelitDAO;
 import com.esliceu.models.Satelit;
 
 import java.sql.*;
@@ -16,7 +14,7 @@ public class planetes {
 
 
         try{
-            connection = DriverManager.getConnection(jdbc,"root","");
+            //connection = DriverManager.getConnection(jdbc,"root","");
             //Statement statement = connection.createStatement();
             //ResultSet set = statement.executeQuery("SELECT * FROM planeta");
             MySQLDaoManager manager = new MySQLDaoManager("root","","univers");

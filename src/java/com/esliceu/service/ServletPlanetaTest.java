@@ -1,4 +1,4 @@
-package com.esliceu.serviceplanetes;
+package com.esliceu.service;
 
 import com.esliceu.models.Planeta;
 
@@ -12,8 +12,8 @@ import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
 
-@WebServlet("/planetes")
-public class ServletPlaneta extends HttpServlet {
+@WebServlet("/planetes_test")
+public class ServletPlanetaTest extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
