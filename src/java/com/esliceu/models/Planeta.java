@@ -42,4 +42,9 @@ public class Planeta {
     public void setHabitable(Boolean habitable) {
         this.habitable = habitable;
     }
+
+    @Override
+    public String toString() {
+        return "Planeta{" + "id=" + id + ", nom='" + nom + '\'' + ", massa=" + massa + ", habitable=" + habitable + '}';
+    }
 }

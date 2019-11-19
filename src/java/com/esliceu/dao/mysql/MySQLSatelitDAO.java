@@ -3,10 +3,7 @@ package com.esliceu.dao.mysql;
 import com.esliceu.dao.SatelitsDAO;
 import com.esliceu.models.Satelit;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +24,19 @@ public class MySQLSatelitDAO implements SatelitsDAO {
     @Override
     public void insert(Satelit p) {
         try{
-            preparedStatement = connection.prepareStatement(INSERT);
+            preparedStatement = connection.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1,p.getNom());
             preparedStatement.setDouble(2,p.getMassa());
             preparedStatement.setInt(3,p.getVelocitat());
             preparedStatement.setInt(4,p.getIdplaneta());
             if(preparedStatement.executeUpdate() == 0){
+                throw new SQLException();
+            }
+            // Retorna l'id de l'objecte satèlit que acabam de crear a sa BD
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()){
+                p.setIdsatelit(resultSet.getInt(1));
+            } else {
                 throw new SQLException();
             }
         } catch (SQLException sql) {
@@ -153,6 +157,7 @@ public class MySQLSatelitDAO implements SatelitsDAO {
                     e.printStackTrace();
                 }
             }
+            //close_object(PreparedStatement p);
             if(preparedStatement != null){
                 try {
                     preparedStatement.close();
@@ -163,4 +168,14 @@ public class MySQLSatelitDAO implements SatelitsDAO {
         }
         return satelit;
     }
+
+   /* private <T> void close_object(T p){
+        if(p != null){
+            try {
+                (Class<T>)p.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }*/
 }

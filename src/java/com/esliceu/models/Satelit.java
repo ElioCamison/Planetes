@@ -15,8 +15,13 @@ public class Satelit {
         this.idplaneta = idplaneta;
     }
 
+
     public int getIdsatelit() {
         return idsatelit;
+    }
+
+    public void setIdsatelit(int idsatelit) {
+        this.idsatelit = idsatelit;
     }
 
     public String getNom() {
@@ -47,4 +52,8 @@ public class Satelit {
         return idplaneta;
     }
 
+    @Override
+    public String toString() {
+        return "Satelit{" + "idsatelit=" + idsatelit + ", nom='" + nom + '\'' + ", massa=" + massa + ", velocitat=" + velocitat + ", idplaneta=" + idplaneta + '}';
+    }
 }
