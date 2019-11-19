@@ -5,7 +5,7 @@ import com.esliceu.models.Planeta;
 
 import java.util.List;
 
-public class MysqlPlanetaDAO implements PlanetaDAO {
+public class MySQLPlanetaDAO implements PlanetaDAO {
     @Override
     public void insert(Planeta p) {
 

@@ -5,21 +5,22 @@ import com.esliceu.models.Satelit;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySatelitDAO implements SatelitsDAO {
+public class MySQLSatelitDAO implements SatelitsDAO {
 
     private Connection connection;
     private PreparedStatement preparedStatement = null;
-    final String INSERT = "INSERT INTO satelit(nom,massa,velocitat,idplaneta) VALUES(?,?,?,?)";
+    final String INSERT = "INSERT INTO satelit(nom,massa,velocitat,planeta_idplaneta) VALUES(?,?,?,?)";
     final String UPDATE = "UPDATE satelit SET nom=?, set massa= ?, set velocitat = ?, set idplaneta=? WHERE idsatelit=?)";
     final String DELETE = "DELETE FROM satelit WHERE idsatelit=?";
     final String GET_ALL = "SELECT * FROM satelit LIMIT 20;";
     final String GET_ONE = "SELECT * FROM satelit WHERE idsatelit=?;";
 
-    public MySatelitDAO(Connection connection){
+    public MySQLSatelitDAO(Connection connection){
         this.connection = connection;
     }
 
@@ -86,14 +87,37 @@ public class MySatelitDAO implements SatelitsDAO {
         }
     }
 
+    private Satelit createObject(ResultSet resultSet) throws SQLException {
+        int id = resultSet.getInt("idsatelit");
+        String nom = resultSet.getString("nom");
+        Double massa = resultSet.getDouble("massa");
+        int velocitat = resultSet.getInt("velocitat");
+        int idplaneta = resultSet.getInt("planeta_idplaneta");
+        Satelit satelit = new Satelit(nom,massa,velocitat,idplaneta);
+        return satelit;
+    }
+
     @Override
     public List<Satelit> getAll() {
-        ArrayList<Satelit> satelits = new ArrayList<>();
+        ArrayList<Satelit> sateliteList = new ArrayList<>();
+        ResultSet resultSet = null;
+        Satelit satelit = null;
         try {
             preparedStatement = connection.prepareStatement(GET_ALL);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                sateliteList.add(createObject(resultSet));
+            }
         } catch (SQLException sql){
             sql.printStackTrace();
         } finally {
+            if(resultSet != null){
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
             if(preparedStatement != null){
                 try {
                     preparedStatement.close();
@@ -103,16 +127,32 @@ public class MySatelitDAO implements SatelitsDAO {
             }
         }
 
-        return satelits;
+        return sateliteList;
     }
 
     @Override
     public Satelit getOne(Integer id) {
+        ResultSet resultSet = null;
+        Satelit satelit = null;
         try {
-            preparedStatement = connection.prepareStatement(GET_ALL);
+            preparedStatement = connection.prepareStatement(GET_ONE);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                satelit = createObject(resultSet);
+            } else {
+                throw new SQLException();
+            }
         } catch (SQLException sql){
             sql.printStackTrace();
         } finally {
+            if(resultSet != null){
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
             if(preparedStatement != null){
                 try {
                     preparedStatement.close();
@@ -121,6 +161,6 @@ public class MySatelitDAO implements SatelitsDAO {
                 }
             }
         }
-        return null;
+        return satelit;
     }
 }
