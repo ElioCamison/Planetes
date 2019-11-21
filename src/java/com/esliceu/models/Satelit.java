@@ -7,8 +7,14 @@ public class Satelit {
     int velocitat;
     int idplaneta;
 
+    public Satelit(){
 
-    public Satelit(String nom, Double massa, int velocitat, int idplaneta) {
+    }
+
+
+    // TODO se tiene que quitarntodos lo parámetros del constructor, y crearlo todo desde setters
+    public Satelit(int idsatelit,String nom, Double massa, int velocitat, int idplaneta) {
+        this.idsatelit = idsatelit;
         this.nom = nom;
         this.massa = massa;
         this.velocitat = velocitat;
@@ -50,6 +56,10 @@ public class Satelit {
 
     public int getIdplaneta() {
         return idplaneta;
+    }
+
+    public void setIdplaneta(int idplaneta) {
+        this.idplaneta = idplaneta;
     }
 
     @Override

@@ -97,7 +97,13 @@ public class MySQLSatelitDAO implements SatelitsDAO {
         Double massa = resultSet.getDouble("massa");
         int velocitat = resultSet.getInt("velocitat");
         int idplaneta = resultSet.getInt("planeta_idplaneta");
-        Satelit satelit = new Satelit(nom,massa,velocitat,idplaneta);
+        //Satelit satelit = new Satelit(id,nom,massa,velocitat,idplaneta);
+        Satelit satelit = new Satelit();
+        satelit.setIdsatelit(id);
+        satelit.setNom(nom);
+        satelit.setVelocitat(velocitat);
+        satelit.setIdplaneta(idplaneta);
+        satelit.setIdsatelit(id);
         return satelit;
     }
 
@@ -105,7 +111,6 @@ public class MySQLSatelitDAO implements SatelitsDAO {
     public List<Satelit> getAll() {
         ArrayList<Satelit> sateliteList = new ArrayList<>();
         ResultSet resultSet = null;
-        Satelit satelit = null;
         try {
             preparedStatement = connection.prepareStatement(GET_ALL);
             resultSet = preparedStatement.executeQuery();

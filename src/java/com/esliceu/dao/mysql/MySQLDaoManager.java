@@ -30,9 +30,9 @@ public class MySQLDaoManager implements DaoManager {
 
     @Override
     public PlanetaDAO getPlanetaDAO() {
-        /*if(planetaDAO == null){
+        if(planetaDAO == null){
             planetaDAO = new MySQLPlanetaDAO(connection);
-        }*/
+        }
         return planetaDAO;
     }
 }

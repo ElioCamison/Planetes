@@ -1,25 +1,22 @@
 package com.esliceu.models;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
-public class Planeta {
+public class Planeta implements Serializable {
     private int idplaneta;
     private String nom;
     private float massa;
     private Boolean habitable;
 
-    public Planeta(String nom, float massa, Boolean habitable) {
-        this.idplaneta = idplaneta;
-        this.nom = nom;
-        this.massa = massa;
-        this.habitable = habitable;
+    public Planeta() {
     }
 
     public void setIdplaneta(int idplaneta) {
         this.idplaneta = idplaneta;
     }
 
-    public int getId() {
+    public int getIdplaneta() {
         return idplaneta;
     }
 
@@ -40,7 +37,8 @@ public class Planeta {
         this.massa = massa;
     }
 
-    public Boolean getHabitable() {
+    // TODO això ha ser isHabitable
+    public Boolean isHabitable() {
         return habitable;
     }
 
