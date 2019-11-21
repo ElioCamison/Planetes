@@ -40,7 +40,11 @@ public class ServletPlanetaTest extends HttpServlet {
                 String nom_planeta = set.getString("nom");
                 float massa = set.getFloat("massa");
                 Boolean habitable = set.getBoolean("habitable");
-                Planeta planeta = new Planeta(nom_planeta,massa,habitable);
+                Planeta planeta = new Planeta();
+                planeta.setIdplaneta(id_planeta);
+                planeta.setNom(nom_planeta);
+                planeta.setMassa(massa);
+                planeta.setHabitable(habitable);
                 planetas_list.add(planeta);
             }
             statement.close();
